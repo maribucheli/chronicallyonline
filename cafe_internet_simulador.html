@@ -1,0 +1,541 @@
+
+<h2 class="sr-only">Simulador de pantalla de café internet con login estilo Windows 7 y temporizador de sesión</h2>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Tahoma, sans-serif; }
+
+#app {
+  width: 100%;
+  min-height: 520px;
+  background: #1a3a5c;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+}
+
+.wallpaper {
+  width: 100%;
+  min-height: 520px;
+  background: #1a5fa8;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.wallpaper-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 30% 60%, #0d47a1 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 70% 30%, #1565c0 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 50% 80%, #0a3d7a 0%, transparent 70%);
+  opacity: 0.8;
+}
+
+.taskbar-top {
+  height: 28px;
+  background: rgba(10,40,90,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 12px;
+  gap: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.taskbar-clock {
+  color: #c8dff5;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+}
+
+.login-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  padding: 2rem 1rem;
+}
+
+.cafe-logo {
+  color: #c8dff5;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  opacity: 0.7;
+}
+
+.login-box {
+  background: rgba(10, 40, 90, 0.55);
+  border: 1px solid rgba(150,200,255,0.25);
+  border-radius: 8px;
+  padding: 28px 36px;
+  width: 300px;
+  text-align: center;
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #3a7bd5;
+  border: 2px solid rgba(150,200,255,0.4);
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-svg { width: 40px; height: 40px; }
+
+.username {
+  color: #ddeeff;
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.password-field {
+  width: 100%;
+  padding: 7px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(150,200,255,0.35);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 13px;
+  outline: none;
+  margin-bottom: 14px;
+  letter-spacing: 0.1em;
+}
+
+.password-field::placeholder { color: rgba(200,220,255,0.4); letter-spacing: 0; }
+.password-field:focus { border-color: rgba(150,200,255,0.7); background: rgba(255,255,255,0.18); }
+
+.login-btn {
+  background: #3a7bd5;
+  border: 1px solid rgba(150,200,255,0.4);
+  color: #fff;
+  padding: 7px 28px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+.login-btn:hover { background: #2c65bd; }
+.login-btn:active { transform: scale(0.98); }
+
+.hint { color: rgba(200,220,255,0.45); font-size: 11px; margin-top: 10px; }
+
+.session-screen {
+  display: none;
+  width: 100%;
+  min-height: 520px;
+  flex-direction: column;
+  background: #1a5fa8;
+  position: relative;
+}
+
+.session-taskbar {
+  height: 40px;
+  background: rgba(8,30,70,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  position: relative;
+  z-index: 2;
+}
+
+.start-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #2563a8;
+  border: none;
+  border-radius: 14px;
+  padding: 4px 14px 4px 8px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.start-orb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #3a7bd5;
+  border: 1.5px solid rgba(150,200,255,0.5);
+}
+
+.session-timer-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #c8dff5;
+  font-size: 12px;
+}
+
+.timer-display {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  min-width: 60px;
+  text-align: center;
+}
+
+.timer-display.warning { color: #ffcc44; }
+.timer-display.danger { color: #ff5555; }
+
+.desktop-content {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.desktop-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 64px;
+  cursor: default;
+}
+
+.icon-img {
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-label {
+  color: #ddeeff;
+  font-size: 10px;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  line-height: 1.2;
+}
+
+.session-wallpaper-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 30% 60%, #0d47a1 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 70% 30%, #1565c0 0%, transparent 60%);
+  opacity: 0.6;
+}
+
+.timeout-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,20,0.82);
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  min-height: 520px;
+}
+
+.timeout-card {
+  background: rgba(10,30,70,0.97);
+  border: 1px solid rgba(150,200,255,0.3);
+  border-radius: 10px;
+  padding: 36px 40px;
+  text-align: center;
+  width: 320px;
+}
+
+.timeout-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(220,50,50,0.2);
+  border: 1.5px solid rgba(220,80,80,0.5);
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeout-title {
+  color: #fff;
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.timeout-sub {
+  color: rgba(180,210,255,0.6);
+  font-size: 12px;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.timeout-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.timeout-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: center;
+  transition: opacity 0.15s;
+}
+
+.timeout-btn:hover { opacity: 0.85; }
+
+.btn-primary {
+  background: #2563a8;
+  border: 1px solid rgba(150,200,255,0.4);
+  color: #fff;
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(150,200,255,0.2);
+  color: rgba(200,220,255,0.8);
+}
+
+.session-bottom-bar {
+  height: 28px;
+  background: rgba(8,30,70,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 14px;
+  position: relative;
+  z-index: 2;
+}
+
+.bottom-clock {
+  color: #c8dff5;
+  font-size: 11px;
+}
+
+.progress-bar-wrap {
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  width: 120px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: #3a7bd5;
+  border-radius: 2px;
+  transition: width 1s linear, background 0.5s;
+}
+</style>
+
+<div id="app">
+  <div id="login-screen" class="wallpaper">
+    <div class="wallpaper-pattern"></div>
+    <div class="taskbar-top">
+      <span class="taskbar-clock" id="clock-top">--:--</span>
+    </div>
+    <div class="login-area">
+      <div class="cafe-logo">CiberCafé NetZone</div>
+      <div class="login-box">
+        <div class="avatar">
+          <svg class="avatar-svg" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="15" r="8" fill="rgba(200,230,255,0.7)"/>
+            <ellipse cx="20" cy="34" rx="13" ry="8" fill="rgba(200,230,255,0.7)"/>
+          </svg>
+        </div>
+        <div class="username">Usuario Invitado</div>
+        <input class="password-field" type="password" id="pwd" placeholder="Contraseña" maxlength="20" />
+        <button class="login-btn" onclick="doLogin()">Iniciar sesión</button>
+        <div class="hint">Pista: cualquier contraseña funciona</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="session-screen" class="session-screen">
+    <div class="session-wallpaper-pattern"></div>
+    <div class="session-taskbar">
+      <button class="start-btn">
+        <div class="start-orb"></div>
+        Inicio
+      </button>
+      <div class="session-timer-bar">
+        <span style="color:rgba(200,220,255,0.6); font-size:11px;">Tiempo restante</span>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+        <div class="timer-display" id="timer-display">01:00</div>
+      </div>
+    </div>
+
+    <div class="desktop-content">
+      <div class="desktop-icons">
+        <div class="desktop-icon">
+          <div class="icon-img">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="3" width="16" height="11" rx="1.5" stroke="rgba(200,230,255,0.8)" stroke-width="1.5"/>
+              <path d="M7 17h6M10 14v3" stroke="rgba(200,230,255,0.8)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span class="icon-label">Internet Explorer</span>
+        </div>
+        <div class="desktop-icon">
+          <div class="icon-img">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="3" y="4" width="14" height="12" rx="1" stroke="rgba(200,230,255,0.8)" stroke-width="1.5"/>
+              <path d="M6 8h8M6 11h5" stroke="rgba(200,230,255,0.8)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span class="icon-label">Mis documentos</span>
+        </div>
+        <div class="desktop-icon">
+          <div class="icon-img">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 14l4-4 3 3 5-6" stroke="rgba(200,230,255,0.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="icon-label">Papelera</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="session-bottom-bar">
+      <span class="bottom-clock" id="clock-session">--:--</span>
+    </div>
+
+    <div class="timeout-overlay" id="timeout-overlay" style="display:flex; align-items:center; justify-content:center; display:none;">
+      <div class="timeout-card">
+        <div class="timeout-icon">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+            <circle cx="13" cy="13" r="10" stroke="#e05555" stroke-width="1.5"/>
+            <path d="M13 7v7" stroke="#e05555" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="13" cy="18" r="1.2" fill="#e05555"/>
+          </svg>
+        </div>
+        <div class="timeout-title">Tu tiempo ha terminado</div>
+        <div class="timeout-sub">La sesión de este computador ha finalizado.<br>¿Qué deseas hacer?</div>
+        <div class="timeout-buttons">
+          <a href="#alquilar" class="timeout-btn btn-primary">Alquila otro compu</a>
+          <a href="#salir" class="timeout-btn btn-secondary">Termina la visita</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DURACION = 60;
+let segundosRestantes = DURACION;
+let intervalo = null;
+
+function updateClock() {
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2,'0');
+  const m = String(now.getMinutes()).padStart(2,'0');
+  const str = h + ':' + m;
+  const c1 = document.getElementById('clock-top');
+  const c2 = document.getElementById('clock-session');
+  if (c1) c1.textContent = str;
+  if (c2) c2.textContent = str;
+}
+
+updateClock();
+setInterval(updateClock, 10000);
+
+document.getElementById('pwd').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') doLogin();
+});
+
+function doLogin() {
+  const pwd = document.getElementById('pwd').value;
+  if (!pwd) {
+    document.getElementById('pwd').style.borderColor = 'rgba(220,80,80,0.7)';
+    setTimeout(() => document.getElementById('pwd').style.borderColor = '', 1200);
+    return;
+  }
+  document.getElementById('login-screen').style.display = 'none';
+  const ss = document.getElementById('session-screen');
+  ss.style.display = 'flex';
+  iniciarTimer();
+}
+
+function formatTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return String(m).padStart(2,'0') + ':' + String(sec).padStart(2,'0');
+}
+
+function iniciarTimer() {
+  segundosRestantes = DURACION;
+  actualizarTimer();
+  intervalo = setInterval(function() {
+    segundosRestantes--;
+    actualizarTimer();
+    if (segundosRestantes <= 0) {
+      clearInterval(intervalo);
+      mostrarTimeout();
+    }
+  }, 1000);
+}
+
+function actualizarTimer() {
+  const el = document.getElementById('timer-display');
+  const fill = document.getElementById('progress-fill');
+  const pct = (segundosRestantes / DURACION) * 100;
+
+  el.textContent = formatTime(segundosRestantes);
+
+  if (segundosRestantes <= 10) {
+    el.className = 'timer-display danger';
+    fill.style.background = '#e05555';
+  } else if (segundosRestantes <= 20) {
+    el.className = 'timer-display warning';
+    fill.style.background = '#ffcc44';
+  } else {
+    el.className = 'timer-display';
+    fill.style.background = '#3a7bd5';
+  }
+
+  fill.style.width = pct + '%';
+}
+
+function mostrarTimeout() {
+  const overlay = document.getElementById('timeout-overlay');
+  overlay.style.display = 'flex';
+}
+</script>
