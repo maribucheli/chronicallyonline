@@ -14,14 +14,14 @@ p {
 }
 
 #index {
-    background-image: url(assets/cafeinternet.jpg);
+    background-image: url(/assets/cafeinternet.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
 #mapa {
-    background-image: url(assets/fondociber.jpg);
+    background-image: url(/assets/fondociber.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
