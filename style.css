@@ -1,4 +1,3 @@
-/* Tu CSS existente se mantiene */
 h1 {
   font-family: "Comic Sans MS", cursive, sans-serif;
   font-size: larger; 
@@ -7,89 +6,87 @@ h1 {
 p {
   font-family: "Comic Sans MS", cursive, sans-serif;
   font-size: large; 
+  text-align: center;
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  padding: 10px;
+  border-radius: 15px;
 }
 
 #index {
     background-image: url(assets/cafeinternet.jpg);
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 #mapa {
     background-image: url(assets/fondociber.jpg);
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
 }
 
-/* Versión responsive del wrapper */
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+/* Las imágenes ocupan TODO el ancho y se adaptan */
+.wrapper a {
+  display: block;
+  text-decoration: none;
+}
+
+.wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 15px;
+  transition: transform 0.2s;
+}
+
+.wrapper img:hover {
+  transform: scale(0.98);
+  cursor: pointer;
+}
+
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);  /* 3 columnas en escritorio */
-  gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
-  padding: 10px;  /* Añade un poco de padding */
-  max-width: 100%;
-  overflow-x: hidden;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 10px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-/* Para pantallas de tablet (menos de 768px) */
+/* Tablet */
 @media (max-width: 768px) {
   .wrapper {
-    grid-template-columns: repeat(2, 1fr);  /* Cambia a 2 columnas */
-  }
-  
-  /* Ajusta las posiciones del grid para pantallas medianas */
-  .one {
-    grid-column: 1 / 3;
-    grid-row: 1;
-  }
-  .two {
-    grid-column: 1 / 3;
-    grid-row: 2;
-  }
-  .three {
-    grid-column: 1 / 2;
-    grid-row: 3 / 5;
-  }
-  .four {
-    grid-column: 2 / 3;
-    grid-row: 3;
-  }
-  .five {
-    grid-column: 1 / 2;
-    grid-row: 5;
-  }
-  .six {
-    grid-column: 2 / 3;
-    grid-row: 5;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 }
 
-/* Para móviles (menos de 480px) */
+/* Móvil */
 @media (max-width: 480px) {
   .wrapper {
-    grid-template-columns: 1fr;  /* Una sola columna */
-  }
-  
-  /* Todos los elementos ocupan toda la fila */
-  .one, .two, .three, .four, .five, .six {
-    grid-column: 1;
-  }
-  
-  /* Reorganiza las filas en orden lógico */
-  .one { grid-row: 1; }
-  .two { grid-row: 2; }
-  .three { grid-row: 3; }
-  .four { grid-row: 4; }
-  .five { grid-row: 5; }
-  .six { grid-row: 6; }
-  
-  /* Ajusta tamaños de texto para móvil */
-  h1 {
-    font-size: 1.5rem;
+    grid-template-columns: 1fr;
+    gap: 15px;
   }
   
   p {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
+}
+
+.wrapper img {
+  width: 100%;
+  height: auto;
+  max-height: 400px; /* Opcional: limita la altura máxima */
+  object-fit: contain; /* Esto evita que se recorten */
+  display: block;
 }
