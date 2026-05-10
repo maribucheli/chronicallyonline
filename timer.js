@@ -235,7 +235,7 @@ function mostrarPantallaFin() {
     });
 }
 
-// Función para pausar (útil si quieres agregar pausa manual después)
+// Función para pausar 
 function pausarTimer() {
     timerActivo = false;
 }
@@ -243,3 +243,15 @@ function pausarTimer() {
 function reanudarTimer() {
     timerActivo = true;
 }
+
+
+
+document.getElementById('btn-renovar').addEventListener('click', () => {
+       
+        window.location.reload();
+    });
+    
+    document.getElementById('btn-alquilar').addEventListener('click', () => {
+        
+        window.location.href = 'index.html';
+    });
