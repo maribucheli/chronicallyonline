@@ -1,7 +1,7 @@
 // timer.js - Sistema de timer para todas las páginas
 
 // Configuración
-const TIEMPO_INICIAL = 120; // 120 segundos
+const TIEMPO_INICIAL = 60; 
 let tiempoRestante = TIEMPO_INICIAL;
 let intervalo = null;
 let timerActivo = true;
