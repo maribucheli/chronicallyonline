@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="./reggaetoneros_files/main.css">
 </head>
 <body id="reggaetoneros.head" class="page">
+
 	<div id="reggaetoneros.head.177820103898" class="text resizable object" style="background-color: rgb(255, 229, 53); font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 26px; font-style: italic; font-weight: bold; height: 100.222px; left: 673.889px; line-height: 3.79713em; position: absolute; top: 37.8889px; width: 318.222px; z-index: 100;">
 		L_S REGGAETONER_S
 	</div>
@@ -33,10 +34,33 @@
 		Ke pasa mami??? Físicamente en el ciber, mentalmente en la disco en el bellakeo
 	</div>
 	<div id="reggaetoneros.head.177820191086" class="webvideo resizable object" style="height: 360px; left: 1154px; position: absolute; top: -2px; width: 480px; z-index: 100;">
-		<iframe class="youtube-player" src="reggaetoneros_files/6nl5U0O5nOU.html" style="border-width: 0px; height: 100%; position: absolute; width: 100%;"></iframe>
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/6nl5U0O5nOU?si=gR3Xn-XO26AezH_1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 	</div>
 
+<div class="nick-generator">
+<select id="prefix">
+<option>El</option><option>La</option><option>DJ</option>
+</select>
+<select id="adjective">
+<option>Duro</option><option>Mala</option><option>Flow</option>
+</select>
+<select id="suffix">
+<option>del Bloque</option><option>del Perreo</option><option>2007</option>
+</select>
+<button onclick="generarNick()">🔥 Generar</button>
+<p id="resultadoNick">________</p>
+</div>
 
+<script>
+function generarNick() {
+let prefix = document.getElementById('prefix').value;
+let adj = document.getElementById('adjective').value;
+let suffix = document.getElementById('suffix').value;
+let nick = `${prefix} ${adj} ${suffix}`;
+document.getElementById('resultadoNick').innerHTML = nick;
+// opcional: sonido de "wuh"
+}
+</script>
 	<script>
   const EJECUTAR_FORMULARIO = false;
 </script>

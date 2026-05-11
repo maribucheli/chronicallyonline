@@ -35,6 +35,7 @@
 </style>
 </head>
 <body id="manualidades.head" class="page">
+	
 	<div id="manualidades.head.177825619112" class="text resizable object" style="background-color: rgb(224, 118, 228); color: rgb(0, 0, 0); font-family: LatinModern; font-size: 42px; font-style: italic; font-weight: bold; height: 100.222px; left: 678.889px; line-height: 2.49778em; position: absolute; text-align: center; top: 34.8889px; width: 282.222px; z-index: 100;">
 		L_S DIY
 	</div>
@@ -57,10 +58,33 @@
 		Hola amigi!!! Estamos buscando recetas de slime sin borax, sin detergente, sin pegamento, sin bicarbonato, sin sal... Parcha un rato con nosotr_s!!
 	</div>
 	<div id="manualidades.head.17782568009" class="webvideo resizable object" style="height: 360px; left: 690px; position: absolute; top: 439px; width: 480px; z-index: 100;">
-		<iframe class="youtube-player" src="//www.youtube.com/embed/p99YbkB-evw?rel=0" style="border-width: 0px; height: 100%; position: absolute; width: 100%;"></iframe>
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/p99YbkB-evw?si=KpxB7HxqAfnyQ4AH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 	</div>
 
+<div id="pixelArt" style="display:grid; grid-template-columns:repeat(16,30px);"></div>
+<button onclick="limpiarPixel()">Limpiar</button>
 
+<script>
+const colores = ['#000','#ff00ff','#00ff00','#ffff00'];
+let colorActual = 0;
+
+// Crear 256 celdas
+for(let i=0; i<256; i++) {
+let celda = document.createElement('div');
+celda.style.width = '30px';
+celda.style.height = '30px';
+celda.style.border = '1px solid gray';
+celda.style.backgroundColor = '#fff';
+celda.onclick = () => {
+celda.style.backgroundColor = colores[colorActual];
+};
+document.getElementById('pixelArt').appendChild(celda);
+}
+
+function limpiarPixel() {
+document.querySelectorAll('#pixelArt div').forEach(c => c.style.backgroundColor = '#fff');
+}
+</script>
 <script>
   const EJECUTAR_FORMULARIO = false;
 </script>

@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="https://buchelii.hotglue.me/css/main.css">
 </head>
 <body id="maquillaje.head" class="page">
+
 	<div id="maquillaje.head.177825443434" class="text resizable object" style="background-color: rgb(255, 0, 255); font-family: Tahoma, Geneva, sans-serif; font-size: 39px; font-style: italic; font-weight: normal; height: 100.222px; left: 727.889px; line-height: 1.20701em; position: absolute; text-align: center; top: 21.8889px; width: 279.222px; z-index: 100;">
 		L_S BEAUTY GURUS
 	</div>
@@ -34,9 +35,26 @@
 		Hi, sister!&nbsp;Estamos probando nuevos looks con las sombras de James Charles. Te vamos a poner iconic!!!
 	</div>
 	<div id="maquillaje.head.177825614220" class="webvideo resizable object" style="height: 360px; left: 211px; position: absolute; top: 339px; width: 480px; z-index: 100;">
-		<iframe class="youtube-player" src="//www.youtube.com/embed/sRqvpVnL3Us?rel=0" style="border-width: 0px; height: 100%; position: absolute; width: 100%;"></iframe>
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/sRqvpVnL3Us?si=snF3885Yx2DOoxsD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 	</div>
 
+<img id="foto" src="selfie.jpg" style="width:300px;">
+<input type="range" id="brillo" min="0" max="200" value="100">
+<input type="range" id="saturacion" min="0" max="200" value="100">
+
+<script>
+const img = document.getElementById('foto');
+document.getElementById('brillo').oninput = function() {
+let b = this.value;
+let s = document.getElementById('saturacion').value;
+img.style.filter = `brightness(${b}%) saturate(${s}%)`;
+}
+document.getElementById('saturacion').oninput = function() {
+let s = this.value;
+let b = document.getElementById('brillo').value;
+img.style.filter = `brightness(${b}%) saturate(${s}%)`;
+}
+</script>
 
 <script>
   const EJECUTAR_FORMULARIO = false;

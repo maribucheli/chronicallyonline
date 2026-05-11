@@ -34,6 +34,6 @@ if (typeof EJECUTAR_FORMULARIO !== 'undefined' && EJECUTAR_FORMULARIO === true &
   }
 }
 
-// Opcional: Mensaje de depuración (borrar después)
-console.log("Estado - EJECUTAR_FORMULARIO:", EJECUTAR_FORMULARIO);
-console.log("Formulario completado:", localStorage.getItem('formularioCompletado'));
+
+
+
