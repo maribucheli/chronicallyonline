@@ -10,6 +10,7 @@
   justify-content: center;  
   align-items: center;     
   flex-direction: column; 
+  position: relative;
 }
 
 h1 {
@@ -65,13 +66,9 @@ p {
     margin: 0;
     padding: 20px;
      text-align: center; 
+       position: relative;
 }
 
-body {
-    min-height: 100vh;
-    margin: 0;
-    padding: 20px;
-}
 
 .wrapper a {
   display: block;
@@ -127,8 +124,5 @@ body {
   object-fit: contain; /* Esto evita que se recorten */
   display: block;
 }
-
-
-
 
 

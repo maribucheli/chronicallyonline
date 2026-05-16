@@ -1,7 +1,7 @@
 // timer.js - Sistema de timer para todas las páginas
 
 // Configuración
-const TIEMPO_INICIAL = 60; 
+const TIEMPO_INICIAL = 45; 
 let tiempoRestante = TIEMPO_INICIAL;
 let intervalo = null;
 let timerActivo = true;
@@ -18,7 +18,7 @@ function crearTimerEnPantalla() {
     timerDiv.id = 'timer-container';
     timerDiv.innerHTML = `
         <div id="timer-box">
-            <div id="timer-label">⏱️ Tiempo restante</div>
+            <div id="timer-label">Tiempo restante</div>
             <div id="timer-display">02:00</div>
         </div>
     `;
@@ -41,7 +41,7 @@ function agregarEstilosTimer() {
         }
         
         #timer-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: rgb(5, 180, 180);
             color: white;
             padding: 15px 25px;
             border-radius: 20px;
@@ -74,7 +74,7 @@ function agregarEstilosTimer() {
         
         /* Cuando quedan menos de 10 segundos */
         #timer-box.urgente {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background:  rgb(138, 32, 28);
             animation: shake 0.5s infinite;
         }
         
@@ -106,7 +106,7 @@ function agregarEstilosTimer() {
         }
         
         .contenedor-opciones {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: blue);
             padding: 40px;
             border-radius: 30px;
             text-align: center;
@@ -149,12 +149,12 @@ function agregarEstilosTimer() {
         }
         
         .boton-renovar {
-            background: #4CAF50;
+            background:  rgb(5, 180, 180);
             color: white;
         }
         
         .boton-alquilar {
-            background: #ff9800;
+            background:  rgb(200, 209, 65);
             color: white;
         }
     `;
@@ -227,11 +227,11 @@ function mostrarPantallaFin() {
     
     // Configurar botones
     document.getElementById('btn-renovar').addEventListener('click', () => {
-        window.location.href = 'index.html'; // Volver al inicio
+         window.location.reload();
     });
     
     document.getElementById('btn-alquilar').addEventListener('click', () => {
-        window.location.href = 'index.html'; // También vuelve al inicio (puedes cambiarlo)
+        window.location.href = 'mapa.html'; 
     });
 }
 
