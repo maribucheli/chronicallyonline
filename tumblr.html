@@ -9,6 +9,32 @@
 </head>
 <body id="tumblr.head" class="page" style="background-image: url('/assets/ventana.jpg'); background-size: cover; background-position: top center; background-repeat: no-repeat; background-attachment: fixed; margin: 0; padding: 0; min-height: 100vh;">
 	
+
+	<select id="fondo">
+<option value="assets/juegotumblr1.jpg">Ciudad</option><option value="assets/juegotumblr2.jpg">Atardecer</option>
+</select>
+<select id="filtro">
+<option value="grayscale(1)">Blanco/negro</option><option value="sepia(1)">Sepia</option>
+</select>
+<input id="frase" placeholder="tu frase melancólica">
+<button onclick="hacerCollage()">Publicar en Tumblr</button>
+<div id="collagePreview"></div>
+
+<script>
+function hacerCollage() {
+let fondo = document.getElementById('fondo').value;
+let filtro = document.getElementById('filtro').value;
+let frase = document.getElementById('frase').value;
+let preview = document.getElementById('collagePreview');
+preview.innerHTML = `
+<div style="filter:${filtro};">
+<img src="${fondo}" width="300">
+<p style="font-family:monospace; background:white;">${frase}</p>
+</div>
+<small> 3 notas • hace 45 minutos</small>
+`;
+}
+</script>
 	<div id="tumblr.head.177817759551" class="text resizable object" style="background-color: rgb(88, 88, 66); color: rgb(255, 255, 255); font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 40px; font-style: italic; font-weight: bold; height: 98px; left: 582px; line-height: 2.55339em; position: absolute; text-align: center; top: 36px; width: 454px; z-index: 100;">
 		L_S INDIE TUMBLR
 	</div>

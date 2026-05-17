@@ -1,18 +1,17 @@
-// timer.js - Sistema de timer para todas las páginas
 
 // Configuración
-const TIEMPO_INICIAL = 45; 
+const TIEMPO_INICIAL = 30; 
 let tiempoRestante = TIEMPO_INICIAL;
 let intervalo = null;
 let timerActivo = true;
 
-// Espera a que cargue el DOM
+
 document.addEventListener('DOMContentLoaded', () => {
     crearTimerEnPantalla();
     iniciarTimer();
 });
 
-// Crea el contador visual en la esquina
+//  el contador visual en la esquina
 function crearTimerEnPantalla() {
     const timerDiv = document.createElement('div');
     timerDiv.id = 'timer-container';
@@ -24,11 +23,11 @@ function crearTimerEnPantalla() {
     `;
     document.body.appendChild(timerDiv);
     
-    // Agregar estilos automáticamente
+    //  estilos automáticamente
     agregarEstilosTimer();
 }
 
-// Agrega los estilos del timer
+//  los estilos del timer
 function agregarEstilosTimer() {
     const style = document.createElement('style');
     style.textContent = `
@@ -161,7 +160,7 @@ function agregarEstilosTimer() {
     document.head.appendChild(style);
 }
 
-// Inicia el contador regresivo
+//  el contador regresivo
 function iniciarTimer() {
     actualizarDisplay();
     
@@ -185,7 +184,7 @@ function iniciarTimer() {
     }, 1000);
 }
 
-// Actualiza el display del timer
+//  el display del timer
 function actualizarDisplay() {
     const minutos = Math.floor(tiempoRestante / 60);
     const segundos = tiempoRestante % 60;

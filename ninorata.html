@@ -9,6 +9,35 @@
 </head>
 <body id="niño rata.head" class="page" style="background-image: url('/assets/ventana.jpg'); background-size: cover; background-position: top center; background-repeat: no-repeat; background-attachment: fixed; margin: 0; padding: 0; min-height: 100vh;">
 	
+	
+<div id="pingBar" style="width:200px;height:20px;background:red;"></div>
+<button onclick="disparar()"> Disparar</button>
+<p id="mensajePing"></p>
+
+<script>
+let posicion = 50;
+let direccion = 1;
+let intervalo = setInterval(moverBarra, 50);
+
+function moverBarra() {
+posicion += direccion * 5;
+if(posicion >= 100) direccion = -1;
+if(posicion <= 0) direccion = 1;
+document.getElementById('pingBar').style.width = posicion + '%';
+if(posicion > 80) document.getElementById('pingBar').style.background = 'green';
+else if(posicion > 40) document.getElementById('pingBar').style.background = 'yellow';
+else document.getElementById('pingBar').style.background = 'red';
+}
+
+function disparar() {
+let barra = document.getElementById('pingBar').style.width;
+let valor = parseInt(barra);
+if(valor >= 80) alert(' HEADSHOT! Buen ping');
+else if(valor >= 40) alert(' Le diste pero con lag');
+else alert(' Fail! Ping altísimo');
+}
+</script>
+
 	<div id="niño rata.head.177817128946" class="text resizable object" style="background-color: rgb(0, 255, 15); font-family: Tahoma, Geneva, sans-serif; font-size: 36px; font-style: italic; font-weight: bold; height: 81px; left: 345px; line-height: 2.13167em; position: absolute; text-align: center; top: 42px; width: 385px; z-index: 100;">
 		L_S NIÑ_S RATA
 	</div>
@@ -33,7 +62,7 @@
 	<div id="niño rata.head.177817156158" class="text resizable object" style="background-color: transparent; font-family: Georgia, serif; height: 100.4px; left: 510.8px; position: absolute; top: 359.8px; width: 295.4px; z-index: 100;">
 		Qué pasa chaval???? Estamos construyendo una casa en Maincra, nos ayudas???&nbsp;<br>
 		<br>
-		Y estamos escuchando a Skrillex, espero no te moleste XdXdXd
+		Y estamos escuchando rap del frikismo, espero no te moleste XdXdXd
 	</div>
 	<div id="niño rata.head.177817191062" class="webvideo resizable object" style="height: 360px; left: 832px; position: absolute; top: -70px; width: 386px; z-index: 100;">
 		<iframe width="560" height="315" src="https://www.youtube.com/embed/wAMZ6KpMGQI?si=Zmvs-0eiC8kh7PNG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

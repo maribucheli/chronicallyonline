@@ -37,33 +37,61 @@
 		<iframe width="560" height="315" src="https://www.youtube.com/embed/6nl5U0O5nOU?si=gR3Xn-XO26AezH_1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 	</div>
 
-<div class="nick-generator">
-<select id="prefix">
-<option>El</option><option>La</option><option>DJ</option>
-</select>
-<select id="adjective">
-<option>Duro</option><option>Mala</option><option>Flow</option>
-</select>
-<select id="suffix">
-<option>del Bloque</option><option>del Perreo</option><option>2007</option>
-</select>
-<button onclick="generarNick()">🔥 Generar</button>
-<p id="resultadoNick">________</p>
-</div>
+<div class="nick-generator" style="text-align: center; font-family: 'Comic Sans MS', cursive; padding: 20px;">
+    <h3>🎤 GENERA TU NICKNAME REGGAETONERO 🎤</h3> </div>
+    
+    <div style="background: #f0f0f0; padding: 30px; border-radius: 15px; margin: 20px auto; max-width: 400px;">
+        <p style="font-size: 18px;">Tu flow está por revelarse... </p>
+        
+        <!-- Botón para generar nickname -->
+        <button onclick="generarNickAleatorio()" style="background: #ff69b4; color: white; font-size: 20px; padding: 12px 24px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold;">
+            🔥 ¡REVELAR MI NOMBRE! 🔥
+        </button> </div>
+     <div id="resultadoNick" style="margin-top: 30px; padding: 20px; background: white; border-radius: 10px; min-height: 80px;">
+            <p style="font-size: 16px; color: gray;">❓ ❓ ❓</p>
+            <p style="font-size: 12px; color: #999;">(Haz clic en el botón para descubrir tu nombre)</p>
+        </div>
 
 <script>
-function generarNick() {
-let prefix = document.getElementById('prefix').value;
-let adj = document.getElementById('adjective').value;
-let suffix = document.getElementById('suffix').value;
-let nick = `${prefix} ${adj} ${suffix}`;
-document.getElementById('resultadoNick').innerHTML = nick;
-// opcional: sonido de "wuh"
-}
+// Lista de 10 nicknames reggaetoneros
+const listaDeNicks = [
+    "🔥 El Duro del Bloque",
+    "💃 La Mala del Perreo",
+    "🎧 DJ Flow 2007",
+    "✨ La Bebé del Party",
+    "⚡ El Real de la Noche",
+    "🌟 La Dura del Barrio",
+    "🎤 El Flow 24/7",
+    "💎 La Reina del Perreo",
+    "🚀 DJ Lento 2007",
+    "🌙 El Duro de la Noche"
+];
+
+function generarNickAleatorio() {
+    // Elegir un nickname aleatorio de la lista
+    const indiceAleatorio = Math.floor(Math.random() * listaDeNicks.length);
+    const nickSeleccionado = listaDeNicks[indiceAleatorio];
+    
+    // Mostrar el nickname en el div
+    const resultadoDiv = document.getElementById('resultadoNick');
+    resultadoDiv.innerHTML = `
+        <p style="font-size: 28px; font-weight: bold; color: #ff69b4; margin: 0;">
+            🎤 ${nickSeleccionado} 🎤
+        </p>
+        <p style="font-size: 14px; color: gray; margin-top: 10px;">
+         ¡Ese es tu nombre! 
+        </p>
+    `; } 
+    
 </script>
-	<script>
-  const EJECUTAR_FORMULARIO = false;
+
+<script>
+const EJECUTAR_FORMULARIO = false;
 </script>
+
 <script src="scripts/script.js"></script>
 <script src="scripts/timer.js"></script>
-</body></html>
+
+</body>
+
+</html>
